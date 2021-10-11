@@ -10,6 +10,7 @@ import update from 'immutability-helper';
 import { initialState } from './initial';
 import { Status, UserState } from '../../interfaces/UserState';
 import { requestMiddleware } from './middleware';
+import { GET_USERS, GET_USERS_RESPONSE } from './constants';
 
 interface ContextState {
   getUsers(): void;
@@ -46,9 +47,9 @@ export const Provider = ({ children }: any) => {
     requestMiddleware(action, dispatch);
 
     switch (action.type) {
-      case 'GET_USERS':
+      case GET_USERS:
         return getUsersHandler(state);
-      case 'GET_USERS_RESPONSE':
+      case GET_USERS_RESPONSE:
         return getUsersResponseHandler(state, action);
     }
 
@@ -58,7 +59,7 @@ export const Provider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const getUsers = useCallback(() => {
-    dispatch({ type: 'GET_USERS' });
+    dispatch({ type: GET_USERS });
   }, []);
 
   return (
