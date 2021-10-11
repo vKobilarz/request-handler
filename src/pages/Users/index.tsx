@@ -5,9 +5,9 @@ import { useUsers } from '../../context/user';
 import { Page, Container } from './styles';
 
 const Users = () => {
-  const { getUsers, status } = useUsers();
+  const { getUsers, status, data } = useUsers();
 
-  console.log(status);
+  console.log(status, data);
 
   useEffect(() => {
     getUsers();
