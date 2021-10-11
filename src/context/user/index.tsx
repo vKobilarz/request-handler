@@ -26,12 +26,14 @@ export const UserContext = createContext({} as ContextState);
 
 export const Provider = ({ children }: any) => {
   const reducer = useCallback((state: UserState, action: Action) => {
-    requestMiddleware(action, dispatch);
+    const params = { state, action, dispatch };
+
+    requestMiddleware(params);
 
     // @ts-ignore
     const handler = reducerHandler[action.type];
 
-    const updatedState = handler({ state, action, dispatch }) as UserState;
+    const updatedState = handler(params) as UserState;
 
     return updatedState;
   }, []);
